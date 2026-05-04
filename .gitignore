@@ -1,0 +1,25 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Local backups / generated scratch
+bak/
+*.bak
+*.bak-*
+*.log
+*.tmp
+tmp/
+
+# Local Codex / agent planning records
+AGENTS.md
+CLAUDE.md
+plan.md
+status.md
+version_log.md
+github_publish_guide.md
+rollout-*
+*.assets/
+
+# Local-only verification helper
+test-logi-options-scripts.sh

@@ -1,0 +1,112 @@
+# Logi Options+ Switch
+
+**Raycast** and **Only Switch** compatible scripts to temporarily disable, enable, and restart Logi Options+ on macOS.
+
+## When to use
+
+Use this project when:
+
+- Your Logitech mouse configuration stops working because the Logi Options+ app or service becomes unresponsive.
+- Logi Options+ conflicts with another app or a Mac game, and you want a quick way to temporarily stop and re-enable it.
+
+## What It Does
+
+This project provides a single installer and individual scripts:
+
+```text
+install-logi-options-switch.sh
+```
+
+The installer creates **Raycast**-compatible scripts for:
+
+- `Disable Logi Options+` - temporarily stops Logi Options+ by quitting the app, booting out the current user LaunchAgent, and stopping user-level Logi Options+ helper processes.
+- `Enable Logi Options+` - re-enables Logi Options+
+- `Restart Logi Options+` - force-relaunches Logi Options+
+
+It also creates two **Only Switch** Evolution controls:
+
+- `Logi Options+` switch - a simple toggle for temporarily stopping or re-enabling Logi Options+
+- `Restart Logi Options+` button - a one-click button to force-relaunch Logi Options+
+
+## Integrations
+
+This project is designed to work with:
+
+- [Raycast Script Commands](https://github.com/raycast/script-commands)
+- [OnlySwitch](https://github.com/jacklandrin/OnlySwitch)
+
+If you do not have either app installed, you can still run the shell scripts in the `scripts/` folder directly from Terminal.
+
+## Installation
+
+Download `install-logi-options-switch.sh`, then double-click it to run the installer.
+
+If double-clicking does not work, run it from Terminal:
+
+```bash
+chmod +x install-logi-options-switch.sh
+./install-logi-options-switch.sh
+```
+
+The default install folder is:
+
+```text
+~/Documents/Scripts
+```
+
+The installer writes these same scripts into the selected folder:
+
+```text
+enable-logi-options.sh
+disable-logi-options.sh
+restart-logi-options.sh
+check-logi-options.sh
+```
+
+`check-logi-options.sh` is used by **Only Switch** to keep the switch status updated.
+
+> **Important:** **Raycast** Script Commands and **Only Switch** Evolution controls share the same installed script files. The Evolution controls call scripts from the install folder, so keep that folder and the generated scripts in place after installation.
+
+Available options:
+
+```text
+--default           Install directly to ~/Documents/Scripts without prompting.
+--install-dir PATH  Install scripts directly into PATH.
+--no-restart        Do not reopen Only Switch after database import.
+--no-open-folder    Do not open the install directory in Finder after installation.
+--help              Show help.
+```
+
+## How to use
+
+For **Raycast**:
+
+- Add the install folder to **Raycast** Script Commands if **Raycast** has not already indexed it.
+- Run `Disable Logi Options+`, `Enable Logi Options+`, or `Restart Logi Options+` commands from **Raycast**.
+
+For **Only Switch**:
+
+- Open **Only Switch** and look for the `Logi Options+` switch and `Restart Logi Options+` button in the **EVOLUTION** section of the dropdown menu.
+
+**Only Switch** should show the two Evolution controls like this:
+
+![Only Switch Evolution controls for Logi Options+](assets/only-switch-evolution-controls.png)
+
+- Use the `Logi Options+` switch to temporarily stop or re-enable Logi Options+.
+- Use the `Restart Logi Options+` button to force-relaunch Logi Options+ with one click.
+
+## Tested Environment
+
+This project was tested and confirmed working with:
+
+- **macOS Sequoia** 15.7.5
+- **Only Switch** 2.5.8
+- **Raycast** 1.104.15
+- **Logi Options+** 2.3.879545
+- **Logi Plugin Service** 6.3.0.2406
+
+## Notes
+
+- This project is not affiliated with **Logi Options+**, **Logitech**, **Raycast**, or **Only Switch**.
+- Disable is temporary for the current login session. Logi Options+ may start again after reboot or login.
+- Future versions of **Logi Options+**, **Logi Plugin Service**, **Raycast**, or **Only Switch** may change launchd service names, process names, app paths, Script Commands behavior, or Only Switch storage structure. If that happens, some scripts or installer features may need updates.

@@ -1,0 +1,11 @@
+install-logi-options-switch.sh
+scripts/enable-logi-options.sh
+scripts/disable-logi-options.sh
+scripts/check-logi-options.sh
+scripts/restart-logi-options.sh
+assets/only-switch-evolution-controls.png
+README.md
+CHANGELOG.md
+LICENSE
+.gitignore
+.release-include
