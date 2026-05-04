@@ -1,6 +1,6 @@
 # Logi Options+ Switch
 
-**Raycast** and **Only Switch** compatible scripts to temporarily disable, enable, and restart Logi Options+ on macOS.
+**[Raycast](https://www.raycast.com/)** and [**OnlySwitch**](https://onlyswitch.click/) compatible scripts to temporarily disable, enable, and restart Logi Options+ on macOS.
 
 ## When to use
 
@@ -27,15 +27,6 @@ It also creates two **Only Switch** Evolution controls:
 
 - `Logi Options+` switch - a simple toggle for temporarily stopping or re-enabling Logi Options+
 - `Restart Logi Options+` button - a one-click button to force-relaunch Logi Options+
-
-## Integrations
-
-This project is designed to work with:
-
-- [Raycast Script Commands](https://github.com/raycast/script-commands)
-- [OnlySwitch](https://github.com/jacklandrin/OnlySwitch)
-
-If you do not have either app installed, you can still run the shell scripts in the `scripts/` folder directly from Terminal.
 
 ## Installation
 
@@ -65,7 +56,7 @@ check-logi-options.sh
 
 `check-logi-options.sh` is used by **Only Switch** to keep the switch status updated.
 
-> **Important:** **Raycast** Script Commands and **Only Switch** Evolution controls share the same installed script files. The Evolution controls call scripts from the install folder, so keep that folder and the generated scripts in place after installation.
+> **Important:** **Raycast** Script Commands and **Only Switch** Evolution controls share the same installed script files in this project. **Only Switch** Evolution controls call scripts from the install folder. Please keep that folder and the generated scripts in place after installation.
 
 Available options:
 
@@ -86,14 +77,21 @@ For **Raycast**:
 
 For **Only Switch**:
 
-- Open **Only Switch** and look for the `Logi Options+` switch and `Restart Logi Options+` button in the **EVOLUTION** section of the dropdown menu.
-
-**Only Switch** should show the two Evolution controls like this:
+- Open **Only Switch** and look for the `Logi Options+` switch and `Restart Logi Options+` button in the **EVOLUTION** section of the dropdown menu. **Only Switch** should show the two Evolution controls like this:
 
 ![Only Switch Evolution controls for Logi Options+](assets/only-switch-evolution-controls.png)
 
-- Use the `Logi Options+` switch to temporarily stop or re-enable Logi Options+.
-- Use the `Restart Logi Options+` button to force-relaunch Logi Options+ with one click.
+- Toggle the `Logi Options+` switch to temporarily stop or re-enable Logi Options+.
+- Click the `Restart Logi Options+` button to force-relaunch Logi Options+ with one click.
+
+## Integrations
+
+This project is designed to work with:
+
+- [Raycast Script Commands](https://github.com/raycast/script-commands)
+- [OnlySwitch](https://github.com/jacklandrin/OnlySwitch)
+
+If you do not have either app installed, you can still run the shell scripts in the `scripts/` folder directly from Terminal.
 
 ## Tested Environment
 
