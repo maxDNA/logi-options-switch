@@ -2,10 +2,10 @@
 
 # @raycast.schemaVersion 1
 # @raycast.title Restart Logi Options+
-# @raycast.description Restart the Logi Options+ user agent and reopen the app without administrator privileges.
+# @raycast.description Restart the Logi Options+ user agent without opening the app window.
 # @raycast.mode compact
 # @raycast.packageName Logi Options+
-# @version 1.1.3-raycast-onlyswitch
+# @version 1.1.4-raycast-onlyswitch
 # Project source: https://github.com/maxDNA/logi-options-switch
 
 set -euo pipefail
@@ -14,8 +14,6 @@ USER_ID="$(/usr/bin/id -u)"
 USER_DOMAIN="gui/${USER_ID}"
 USER_SERVICE="${USER_DOMAIN}/com.logi.cp-dev-mgr"
 USER_PLIST="/Library/LaunchAgents/com.logi.optionsplus.plist"
-APP_PATH="/Applications/logioptionsplus.app"
-
 warn() {
   printf 'warning: %s\n' "$1" >&2
 }
@@ -83,17 +81,8 @@ wait_for_user_agent() {
   warn "Logi Options+ user agent was not confirmed after restart"
 }
 
-open_logi_options() {
-  if [[ -d "$APP_PATH" ]]; then
-    /usr/bin/open "$APP_PATH" >/dev/null 2>&1 || true
-  else
-    /usr/bin/open -a "Logi Options+" >/dev/null 2>&1 || true
-  fi
-}
-
 quit_gui
 kill_user_processes
 restart_user_agent
 wait_for_user_agent
-open_logi_options
-printf 'Logi Options+ restarted.\n'
+printf 'Logi Options+ restarted without opening the app window.\n'

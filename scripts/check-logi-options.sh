@@ -5,7 +5,7 @@
 # @raycast.description Print on or off for Only Switch based on the Logi Options+ user agent/application state.
 # @raycast.mode compact
 # @raycast.packageName Logi Options+
-# @version 1.1.3-raycast-onlyswitch
+# @version 1.1.4-raycast-onlyswitch
 # Project source: https://github.com/maxDNA/logi-options-switch
 
 set -euo pipefail

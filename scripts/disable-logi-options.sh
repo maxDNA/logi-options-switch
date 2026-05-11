@@ -5,7 +5,7 @@
 # @raycast.description Temporarily stop Logi Options+ user processes and user LaunchAgent without administrator privileges.
 # @raycast.mode compact
 # @raycast.packageName Logi Options+
-# @version 1.1.3-raycast-onlyswitch
+# @version 1.1.4-raycast-onlyswitch
 # Project source: https://github.com/maxDNA/logi-options-switch
 #
 # Temporary effect: current login session only; Logi Options+ may start again after reboot or login.

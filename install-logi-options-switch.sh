@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Installer for Raycast and Only Switch compatible scripts to temporarily disable, enable, and restart Logi Options+ on macOS.
-# @version 1.3.6
+# @version 1.3.7
 # Project source: https://github.com/maxDNA/logi-options-switch
 
 set -euo pipefail
@@ -17,7 +17,7 @@ ENABLE_FILE_NAME="enable-logi-options.sh"
 DISABLE_FILE_NAME="disable-logi-options.sh"
 CHECK_FILE_NAME="check-logi-options.sh"
 RESTART_FILE_NAME="restart-logi-options.sh"
-SCRIPT_VERSION="1.1.3-raycast-onlyswitch"
+SCRIPT_VERSION="1.1.4-raycast-onlyswitch"
 RESTART_ONLYSWITCH=1
 OPEN_INSTALL_DIR=1
 INSTALL_DIR=""
@@ -170,10 +170,10 @@ install_scripts() {
 
 # @raycast.schemaVersion 1
 # @raycast.title Enable Logi Options+
-# @raycast.description Start Logi Options+ and restore its user LaunchAgent without administrator privileges.
+# @raycast.description Start the Logi Options+ user LaunchAgent without opening the app window.
 # @raycast.mode compact
 # @raycast.packageName Logi Options+
-# @version 1.1.3-raycast-onlyswitch
+# @version 1.1.4-raycast-onlyswitch
 # Project source: https://github.com/maxDNA/logi-options-switch
 
 set -euo pipefail
@@ -182,24 +182,13 @@ USER_ID="$(/usr/bin/id -u)"
 USER_DOMAIN="gui/${USER_ID}"
 USER_SERVICE="${USER_DOMAIN}/com.logi.cp-dev-mgr"
 USER_PLIST="/Library/LaunchAgents/com.logi.optionsplus.plist"
-APP_PATH="/Applications/logioptionsplus.app"
-
 start_user_agent() {
   /bin/launchctl bootstrap "$USER_DOMAIN" "$USER_PLIST" >/dev/null 2>&1 || true
   /bin/launchctl kickstart -k "$USER_SERVICE" >/dev/null 2>&1 || true
 }
 
-open_logi_options() {
-  if [[ -d "$APP_PATH" ]]; then
-    /usr/bin/open "$APP_PATH" >/dev/null 2>&1 || true
-  else
-    /usr/bin/open -a "Logi Options+" >/dev/null 2>&1 || true
-  fi
-}
-
 start_user_agent
-open_logi_options
-printf 'Logi Options+ enabled without administrator privileges.\n'
+printf 'Logi Options+ enabled without opening the app window.\n'
 ENABLE_SCRIPT
   /bin/chmod 755 "$enable_path"
   info "Installed script: $enable_path"
@@ -213,7 +202,7 @@ ENABLE_SCRIPT
 # @raycast.description Temporarily stop Logi Options+ user processes and user LaunchAgent without administrator privileges.
 # @raycast.mode compact
 # @raycast.packageName Logi Options+
-# @version 1.1.3-raycast-onlyswitch
+# @version 1.1.4-raycast-onlyswitch
 # Project source: https://github.com/maxDNA/logi-options-switch
 #
 # Temporary effect: current login session only; Logi Options+ may start again after reboot or login.
@@ -286,7 +275,7 @@ DISABLE_SCRIPT
 # @raycast.description Print on or off for Only Switch based on the Logi Options+ user agent/application state.
 # @raycast.mode compact
 # @raycast.packageName Logi Options+
-# @version 1.1.3-raycast-onlyswitch
+# @version 1.1.4-raycast-onlyswitch
 # Project source: https://github.com/maxDNA/logi-options-switch
 
 set -euo pipefail
@@ -325,10 +314,10 @@ install_restart_script() {
 
 # @raycast.schemaVersion 1
 # @raycast.title Restart Logi Options+
-# @raycast.description Restart the Logi Options+ user agent and reopen the app without administrator privileges.
+# @raycast.description Restart the Logi Options+ user agent without opening the app window.
 # @raycast.mode compact
 # @raycast.packageName Logi Options+
-# @version 1.1.3-raycast-onlyswitch
+# @version 1.1.4-raycast-onlyswitch
 # Project source: https://github.com/maxDNA/logi-options-switch
 
 set -euo pipefail
@@ -337,8 +326,6 @@ USER_ID="$(/usr/bin/id -u)"
 USER_DOMAIN="gui/${USER_ID}"
 USER_SERVICE="${USER_DOMAIN}/com.logi.cp-dev-mgr"
 USER_PLIST="/Library/LaunchAgents/com.logi.optionsplus.plist"
-APP_PATH="/Applications/logioptionsplus.app"
-
 warn() {
   printf 'warning: %s\n' "$1" >&2
 }
@@ -406,20 +393,11 @@ wait_for_user_agent() {
   warn "Logi Options+ user agent was not confirmed after restart"
 }
 
-open_logi_options() {
-  if [[ -d "$APP_PATH" ]]; then
-    /usr/bin/open "$APP_PATH" >/dev/null 2>&1 || true
-  else
-    /usr/bin/open -a "Logi Options+" >/dev/null 2>&1 || true
-  fi
-}
-
 quit_gui
 kill_user_processes
 restart_user_agent
 wait_for_user_agent
-open_logi_options
-printf 'Logi Options+ restarted.\n'
+printf 'Logi Options+ restarted without opening the app window.\n'
 RESTART_SCRIPT
   /bin/chmod 755 "$restart_path"
   info "Installed script: $restart_path"

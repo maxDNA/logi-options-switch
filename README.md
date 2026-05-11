@@ -20,13 +20,13 @@ install-logi-options-switch.sh
 The installer creates **Raycast**-compatible scripts for:
 
 - `Disable Logi Options+` - temporarily stops Logi Options+ by quitting the app, booting out the current user LaunchAgent, and stopping user-level Logi Options+ helper processes.
-- `Enable Logi Options+` - re-enables Logi Options+
-- `Restart Logi Options+` - force-relaunches Logi Options+
+- `Enable Logi Options+` - re-enables Logi Options+ without opening the app window
+- `Restart Logi Options+` - restarts the Logi Options+ user agent without opening the app window
 
 It also creates two **Only Switch** Evolution controls:
 
 - `Logi Options+` switch - a simple toggle for temporarily stopping or re-enabling Logi Options+
-- `Restart Logi Options+` button - a one-click button to force-relaunch Logi Options+
+- `Restart Logi Options+` button - a one-click button to restart the Logi Options+ user agent without opening the app window
 
 ## Installation
 
@@ -84,7 +84,7 @@ For **Only Switch**:
 ![Only Switch Evolution controls for Logi Options+](assets/only-switch-evolution-controls.png)
 
 - Toggle the `Logi Options+` switch to temporarily stop or re-enable Logi Options+.
-- Click the `Restart Logi Options+` button to force-relaunch Logi Options+ with one click.
+- Click the `Restart Logi Options+` button to restart the Logi Options+ user agent with one click.
 
 ## Integrations
 
@@ -109,5 +109,6 @@ This project was tested and confirmed working with:
 
 - This project is not affiliated with **Logi Options+**, **Logitech**, **Raycast**, or **Only Switch**.
 - Disable is temporary for the current login session. Logi Options+ may start again after reboot or login.
+- Enable and Restart restore or restart the Logi Options+ user LaunchAgent without opening the app window, so they should not interrupt your current workspace.
 - **Only Switch** is optional for script installation. It is only required if you want the installer to create Evolution controls automatically.
 - Future versions of **Logi Options+**, **Logi Plugin Service**, **Raycast**, or **Only Switch** may change launchd service names, process names, app paths, Script Commands behavior, or Only Switch storage structure. If that happens, some scripts or installer features may need updates.

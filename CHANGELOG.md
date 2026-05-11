@@ -1,5 +1,14 @@
 # Changelog
 
+## v1.3.7 - 2026-05-11
+
+- Changed `enable-logi-options.sh` so it restores the Logi Options+ user LaunchAgent without opening the Logi Options+ app window.
+- Changed `restart-logi-options.sh` so it restarts the Logi Options+ user agent without opening the Logi Options+ app window.
+- Updated the installer-generated enable and restart scripts to match the standalone script behavior.
+- Updated README notes to explain that enable and restart should not interrupt the current workspace.
+- Bumped the installer version to `1.3.7`.
+- Bumped generated Raycast helper script versions to `1.1.4-raycast-onlyswitch`.
+
 ## v1.3.6 - 2026-05-10
 
 - Changed the installer so missing **Only Switch** is no longer a fatal error.
