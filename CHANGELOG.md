@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.3.6 - 2026-05-10
+
+- Changed the installer so missing **Only Switch** is no longer a fatal error.
+- The installer now still installs Raycast-compatible scripts when no Only Switch database is found.
+- Added Terminal guidance to download Only Switch from `https://onlyswitch.click/` and rerun the installer after opening Only Switch once.
+- Kept incompatible Only Switch database schema as a fatal error to avoid unsafe Evolution writes.
+- Bumped the installer version to `1.3.6`.
+
 ## v1.3.5 - 2026-05-04
 
 - Updated `README.md` to use `temporarily disable, enable, and restart` wording.

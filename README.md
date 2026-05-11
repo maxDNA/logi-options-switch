@@ -58,6 +58,8 @@ check-logi-options.sh
 
 > **Important:** **Raycast** Script Commands and **Only Switch** Evolution controls share the same installed script files in this project. **Only Switch** Evolution controls call scripts from the install folder. Please keep that folder and the generated scripts in place after installation.
 
+If **Only Switch** is not installed or has not been opened yet, the installer still installs the Raycast-compatible scripts and skips the Evolution import. Install and open **Only Switch** once, then rerun the installer to add the Evolution controls.
+
 Available options:
 
 ```text
@@ -107,4 +109,5 @@ This project was tested and confirmed working with:
 
 - This project is not affiliated with **Logi Options+**, **Logitech**, **Raycast**, or **Only Switch**.
 - Disable is temporary for the current login session. Logi Options+ may start again after reboot or login.
+- **Only Switch** is optional for script installation. It is only required if you want the installer to create Evolution controls automatically.
 - Future versions of **Logi Options+**, **Logi Plugin Service**, **Raycast**, or **Only Switch** may change launchd service names, process names, app paths, Script Commands behavior, or Only Switch storage structure. If that happens, some scripts or installer features may need updates.

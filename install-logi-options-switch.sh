@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Installer for Raycast and Only Switch compatible scripts to temporarily disable, enable, and restart Logi Options+ on macOS.
-# @version 1.3.4
+# @version 1.3.6
 # Project source: https://github.com/maxDNA/logi-options-switch
 
 set -euo pipefail
@@ -447,10 +447,10 @@ verify_db_schema() {
   [[ -f "$DB_PATH" ]] || die "Only Switch database not found: $DB_PATH"
 
   sqlite3 "$DB_PATH" "select 1 from sqlite_master where type='table' and name='ZEVOLUTIONCOMMANDENTITY';" | /usr/bin/grep -qx '1' \
-    || die "missing ZEVOLUTIONCOMMANDENTITY table"
+    || die "Only Switch database schema is incompatible; scripts may already be installed, but Evolution import was not completed (missing ZEVOLUTIONCOMMANDENTITY table)"
 
   sqlite3 "$DB_PATH" "select 1 from sqlite_master where type='table' and name='Z_PRIMARYKEY';" | /usr/bin/grep -qx '1' \
-    || die "missing Z_PRIMARYKEY table"
+    || die "Only Switch database schema is incompatible; scripts may already be installed, but Evolution import was not completed (missing Z_PRIMARYKEY table)"
 
   local required_columns=(
     Z_PK Z_ENT Z_OPT ZTIMESTAMP ZICONNAME ZITEMTYPE ZNAME
@@ -462,11 +462,42 @@ verify_db_schema() {
   local column
   for column in "${required_columns[@]}"; do
     sqlite3 "$DB_PATH" "pragma table_info(ZEVOLUTIONCOMMANDENTITY);" | /usr/bin/awk -F'|' '{print $2}' | /usr/bin/grep -qx "$column" \
-      || die "missing ZEVOLUTIONCOMMANDENTITY column: $column"
+      || die "Only Switch database schema is incompatible; scripts may already be installed, but Evolution import was not completed (missing ZEVOLUTIONCOMMANDENTITY column: $column)"
   done
 
   sqlite3 "$DB_PATH" "select 1 from Z_PRIMARYKEY where Z_NAME='EvolutionCommandEntity';" | /usr/bin/grep -qx '1' \
-    || die "missing EvolutionCommandEntity row in Z_PRIMARYKEY"
+    || die "Only Switch database schema is incompatible; scripts may already be installed, but Evolution import was not completed (missing EvolutionCommandEntity row in Z_PRIMARYKEY)"
+}
+
+print_scripts_only_success() {
+  cat <<EOF
+Installation complete.
+Raycast-compatible scripts installed to:
+  $INSTALL_DIR
+
+Only Switch Evolution controls were not imported.
+No Only Switch database was found at:
+  $DB_PATH
+
+Only Switch can be downloaded and installed from:
+  https://onlyswitch.click/
+
+After installing and opening Only Switch once, rerun this installer to add the Evolution controls.
+EOF
+}
+
+print_full_success() {
+  cat <<EOF
+Installation complete.
+Raycast-compatible scripts installed to:
+  $INSTALL_DIR
+
+Only Switch Evolution controls imported or updated:
+  - $EVOLUTION_NAME
+  - $RESTART_EVOLUTION_NAME
+
+Keep the install folder in place because Raycast Script Commands and Only Switch Evolution controls use these same script files.
+EOF
 }
 
 backup_database() {
@@ -729,6 +760,12 @@ main() {
   check_path="$(printf '%s\n' "$script_paths" | /usr/bin/tail -n 3 | /usr/bin/sed -n '3p')"
   restart_path="$(install_restart_script | /usr/bin/tail -n 1)"
 
+  if [[ ! -f "$DB_PATH" ]]; then
+    open_install_dir
+    print_scripts_only_success
+    return 0
+  fi
+
   verify_db_schema
   quit_onlyswitch
 
@@ -747,7 +784,7 @@ main() {
 
   restart_onlyswitch
   open_install_dir
-  info "Done. Raycast can use the installed scripts directly, and Evolution should show controls named: $EVOLUTION_NAME and $RESTART_EVOLUTION_NAME"
+  print_full_success
 }
 
 main "$@"
